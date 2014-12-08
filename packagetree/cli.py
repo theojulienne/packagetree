@@ -51,7 +51,7 @@ def main():
 	f.close()
 
 	if not arguments['--dryrun']:
-		if os.system('which -s fpm') != 0:
+		if os.system('which fpm >/dev/null') != 0:
 			sys.stderr.write('FPM could not be found, is it installed? If not, try \'gem install fpm\'\n')
 			sys.exit(1)
 
