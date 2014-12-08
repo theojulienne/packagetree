@@ -2,11 +2,12 @@
 Package Tree
 
 Usage:
-  packagetree [--dryrun] [--dest-dir=<path>] <file>
+  packagetree [--dryrun] [--dest-dir=<path>] [--iteration=<iteration>] <file>
 
 Options:
-  --dryrun              Don't actually generate the packages, just output some details about what would be run.
-  --dest-dir=<path>     Destination directory for created packages. If not specified, defaults to '.'.
+  --dryrun                Don't actually generate the packages, just output some details about what would be run.
+  --dest-dir=<path>       Destination directory for created packages. If not specified, defaults to '.'.
+  --iteration=<iteration> Specify a default iteration, otherwise none specified.
 """
 
 from docopt import docopt
@@ -28,6 +29,10 @@ def create_package(package, spec, cli):
 		'-n', package,
 		'-v', spec['version'],
 	]
+
+	if cli['--iteration'] is not None:
+		cmd.append('--iteration')
+		cmd.append(cli['--iteration'])
 
 	print '  Dependencies:'
 	for dep in spec['dependencies']:
